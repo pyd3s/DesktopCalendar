@@ -12,3 +12,6 @@ startup.sh
 
 # desktop.py
 desktop.py
+
+# .gitignore
+.gitignore
