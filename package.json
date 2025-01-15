@@ -1,0 +1,35 @@
+{
+  "name": "desktopcal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Pydes",
+  "license": "ISC",
+  "dependencies": {
+    "chinese-lunar": "^0.1.4",
+    "lunar-calendar": "^0.1.4"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "electron-prompt": "^1.7.0"
+  },
+  "build": {
+    "appId": "com.example.desktopcal",
+    "productName": "DesktopCalendar",
+    "files": [
+      "src/**",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "src/cal.png"
+    }
+  }
+}

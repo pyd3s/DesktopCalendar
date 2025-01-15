@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑待办事项</title>
+    <style>
+
+        body {
+            font-family: '楷体';
+            margin: 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        body::-webkit-scrollbar {
+            width: 0; /* 隐藏滚动条 */
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        textarea {
+            font-family: "楷体";
+            width: 92vw;
+            height: 70vh;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+        textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+        button {
+            font-family: "楷体";
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button.cancel {
+            background-color: #6c757d;
+        }
+        button.cancel:hover {
+            background-color: #5a6268;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            -webkit-app-region: drag; /* 使标题栏可拖动 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+    <h3>编辑待办事项</h3>
+    </div>
+    <textarea id="todo-input"></textarea>
+    <br>
+    <center>
+    <button id="save-button">保存</button>
+    <button id="cancel-button" class="cancel">取消</button>
+    </center>
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        document.getElementById('save-button').addEventListener('click', () => {
+            const todo = document.getElementById('todo-input').value;
+            ipcRenderer.send('save-todo', todo);
+        });
+
+        document.getElementById('cancel-button').addEventListener('click', () => {
+            ipcRenderer.send('cancel-todo');
+        });
+
+        ipcRenderer.on('set-todo', (event, todo) => {
+            document.getElementById('todo-input').value = todo;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桌面日历</title>
+    <style>
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: '楷体';
+            overflow: hidden;
+        }
+        .calendar {
+            width: 1400px;
+            height: 1000px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 30px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            backdrop-filter: blur(20px); /* 磨砂玻璃效果 */
+            -webkit-backdrop-filter: blur(20px); /* 兼容 Safari */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow-y: auto; /* 添加垂直滚动条 */
+        }
+        .calendar::-webkit-scrollbar {
+            width: 0; /* 隐藏滚动条 */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            -webkit-app-region: drag; /* 使标题栏可拖动 */
+        }
+        .header button {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            border-radius: 5px;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            border-radius: 50%;
+            text-align: center;
+        }
+        .header button:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            border-radius: 10px;
+            color: cadetblue;
+        }
+        .weekdays span {
+            background: rgba(0,0,0,0.5);
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            border-radius: 10px;
+        }
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .days div {
+            border-radius: 5px;
+            padding: 1px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .days div .content {
+            height: 100%;
+            padding: 5px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .days div .content::-webkit-scrollbar {
+            width: 0; /* 隐藏滚动条 */
+        }
+        button {
+            -webkit-app-region: no-drag; /* 使按钮不可拖动 */
+        }
+        .todo {
+            font-size: 14px; 
+            color: yellowgreen;white-space: pre-wrap;
+            font-weight:bold;
+            overflow-y: auto;
+            height: 120px;
+        }
+        .todo::-webkit-scrollbar {
+            width: 0; /* 隐藏滚动条 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calendar">
+        <div class="header">
+            <button id="prev">&lt;</button>
+            <h2 id="current-month" style="color: white;">January 2025</h2>
+            <button id="next">&gt;</button>
+        </div>
+        <div class="weekdays">
+            <span>星期日</span><span>星期一</span><span>星期二</span><span>星期三</span><span>星期四</span><span>星期五</span><span>星期六</span>
+        </div>
+        <div id="days" class="days"></div> <!-- 添加这个元素 -->
+    </div>
+    <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# dist
+dist/ 
+
+# node_modules
+node_modules/
+
+# save
+save/
+
+# startup.sh
+startup.sh
+
+# desktop.py
+desktop.py
